@@ -9,6 +9,7 @@ import Movie from "../components/Movie";
 const GET_MOVIE = gql`
   query getMovie($id: Int!) {
     movie(id: $id) {
+      id
       title
       medium_cover_image
       language
@@ -94,7 +95,11 @@ export default () => {
         {/*   <Title>{loading ? "loading . . ." : data.movie.title}</Title> */}
         {/* loading 텍스트를 보여주고 싶지 않을 때, */}
 
-        <Title>{data?.movie?.title}</Title>
+        <Title>
+          {loading
+            ? "Loading..."
+            : `${data.movie.title} ${data.movie.isLiked ? "💖" : "😞"}`}
+        </Title>
         <Subtitle>
           {data?.movie?.language} · {data?.movie?.rating}
         </Subtitle>
